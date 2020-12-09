@@ -12,8 +12,6 @@ class App extends React.Component {
         // Make an API call to load the movies
         // Dispatch action
 
-        //this.sleep(2000);  /* Just for testing  */
-
         const {store} = this.props;
         store.subscribe(() => {               /* Subscribe is used so that if store/state changes, the following handler will be called, which re-renders the UI  */
             console.log("State Updated ");
@@ -28,7 +26,8 @@ class App extends React.Component {
 
     /* This function simply checks if the movie (in the args) is in favourite list of the state or not */
     isMovieFavourite = (movie) => {
-        const {favourites} = this.props.store.getState();
+        const {movies} = this.props.store.getState();
+        const {favourites} = movies;
         const index = favourites.indexOf(movie);
         if (index !== -1) {
             return true;
@@ -53,7 +52,10 @@ class App extends React.Component {
     }
 
     render() {
-        const {list, favourites, isFavouriteTabSelected} = this.props.store.getState();  /*  STATE = { list: [] and favourites [] } */
+
+        /*  STATE = { movies: {list:[], favourites:[], isFavouriteTabSelected: false} and search: {results:[]}} } */
+        const {movies} = this.props.store.getState();
+        const {list, favourites, isFavouriteTabSelected} = movies;
         const displayMovies = isFavouriteTabSelected? favourites: list;  /* If isFavouriteTabSelected = true, show favourites list else list */
 
         if (data === undefined) {
