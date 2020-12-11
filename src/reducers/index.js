@@ -1,4 +1,4 @@
-import {ADD_FAVOURITE, ADD_MOVIES, REMOVE_FAVOURITE, SHOW_FAVOURITES_TAB} from "../constants/constants";
+import {ADD_FAVOURITE, ADD_MOVIES, REMOVE_FAVOURITE, SHOW_FAVOURITES_TAB,ADD_SEARCH_RESULT, ADD_MOVIE_TO_LIST} from "../constants/constants";
 import {combineReducers} from "redux";
 
 
@@ -11,7 +11,8 @@ const initialMovieState = {
 
 /* This is for Search State  */
 const initialSearchState = {
-    results: {}
+    results: {},
+    showSearchResults: false,
 }
 
 /* Now Root State is the Parent State, it contains both Movie State as well as Search State  */
@@ -23,9 +24,25 @@ const initialRootState = {
 
 /* Now we'll define the Individual Reducers, so we'll use functions for each reducers which will return state  */
 
-export function searchReducer (state = initialSearchState, action) {
+export function searchReducer(state = initialSearchState, action) {
     console.log("***  Search Reducer  ***");
-    return state;
+    switch (action.type) {
+        case ADD_SEARCH_RESULT:
+            console.log("Inside Search Reducer State: ", state);
+            console.log("Inside Search Reducer Action: ", action);
+            return {
+                ...state,
+                results: action.payload,
+                showSearchResults: true
+            };
+        case ADD_MOVIE_TO_LIST:
+            return {
+                ...state,
+                showSearchResults: false
+            };
+        default:
+            return state;
+    }
 }
 
 /* This is also a function, just a arrow function  */

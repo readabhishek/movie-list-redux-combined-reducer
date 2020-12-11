@@ -1,10 +1,10 @@
 import React from 'react';
 import '../index.css';
-import {data} from '../data/data.js'
+import {data} from '../data/data'
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
-import {ADD_MOVIES} from "../constants/constants.js";
 import {addMovies, showFavouritesTab} from "../actions";
+
 
 class App extends React.Component {
 
@@ -14,8 +14,8 @@ class App extends React.Component {
 
         const {store} = this.props;
         store.subscribe(() => {               /* Subscribe is used so that if store/state changes, the following handler will be called, which re-renders the UI  */
-            console.log("State Updated ");
             this.forceUpdate();
+            console.log("State Updated: ", store.getState());
         });
 
         /* Simply add all movies into the state for first time  */
@@ -54,7 +54,7 @@ class App extends React.Component {
     render() {
 
         /*  STATE = { movies: {list:[], favourites:[], isFavouriteTabSelected: false} and search: {results:[]}} } */
-        const {movies} = this.props.store.getState();
+        const {movies, search} = this.props.store.getState();
         const {list, favourites, isFavouriteTabSelected} = movies;
         const displayMovies = isFavouriteTabSelected? favourites: list;  /* If isFavouriteTabSelected = true, show favourites list else list */
 
@@ -65,7 +65,7 @@ class App extends React.Component {
         } else {
             return (
                 <div className="App">
-                    <Navbar/>
+                    <Navbar store={this.props.store} />
                     <div className="main">
                         <div className="tabs">
                             <div className="tab active-tabs" id="Movies-Tab" onClick={() => {this.ChangeTab(false)}}>Movies</div>
