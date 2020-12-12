@@ -42,6 +42,9 @@ export function showFavouritesTab(value) {
     }
 }
 
+/* Note: Very Important: Here we not returning
+*
+* */
 export function handleMovieSearch(searchText) {
     return function (dispatch) {
         const url = `http://www.omdbapi.com/?apikey=3ca5df7&t=${searchText}`;
@@ -55,10 +58,14 @@ export function handleMovieSearch(searchText) {
     };
 }
 
+
+
 export function addMovieSearchResult(movie) {
     return {
         type: ADD_SEARCH_RESULT,
         payload: movie,
     };
 }
+
+
 

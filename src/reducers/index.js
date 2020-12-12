@@ -25,11 +25,10 @@ const initialRootState = {
 /* Now we'll define the Individual Reducers, so we'll use functions for each reducers which will return state  */
 
 export function searchReducer(state = initialSearchState, action) {
-    console.log("***  Search Reducer  ***");
+    /*console.log("***  Search Reducer  ***");*/
     switch (action.type) {
         case ADD_SEARCH_RESULT:
-            console.log("Inside Search Reducer State: ", state);
-            console.log("Inside Search Reducer Action: ", action);
+
             return {
                 ...state,
                 results: action.payload,
@@ -48,7 +47,7 @@ export function searchReducer(state = initialSearchState, action) {
 /* This is also a function, just a arrow function  */
 export const moviesReducer = (state = initialMovieState, action) => {
 
-    console.log("***  Movie Reducer  ***");
+    /*console.log("***  Movie Reducer  ***");*/
     switch (action.type) {
         case ADD_MOVIES:
             return {
